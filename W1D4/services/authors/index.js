@@ -3,11 +3,19 @@ import Author from "./model.js";
 import Blog from "../blogs/model.js";
 import cloudinaryUploader from "../../middlewares/uploadCloudinary.js";
 import * as AuthorController from "../../controllers/author.controller.js";
+import transport from "../../services/mailServices.js";
 export const authorRoute = Router();
 
 authorRoute.get("/", async (req, res, next) => {
   try {
     let authors = await Author.find();
+    transport.sendMail({
+      from: "noreply@epicoders.com", // sender address
+      to: newPost.author, // list of receivers
+      subject: "New Post", // Subject line
+      text: "You have created a new blog post!", // plain text body
+      html: "<b>You have created a new blog post!</b>", // html body
+    });
     res.send(authors);
   } catch (error) {
     next(error);
