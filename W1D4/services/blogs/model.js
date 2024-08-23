@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
-
+import { Schema, model } from "mongoose";
+import Comment from "../comments/model.js";
 const blogsSchema = new Schema(
   {
     category: {
@@ -10,30 +10,39 @@ const blogsSchema = new Schema(
       type: String,
       required: true,
     },
-    cover: {
+    content: {
       type: String,
       required: true,
     },
-    content: {
+    cover: {
       type: String,
       required: true,
     },
     readTime: {
       value: {
         type: Number,
-        required: true
+        required: true,
       },
       unit: {
         type: String,
-        required: true
+        required: true,
       },
     },
     author: {
       type: Schema.Types.ObjectId,
       ref: "Author",
     },
+    comments: [
+      {
+        text: String,
+        author: {
+          type: Schema.Types.ObjectId,
+          ref: "Author",
+        },
+      },
+    ],
   },
   { collection: "blogs" }
-)
+);
 
-export default model("Blogs", blogsSchema)
+export default model("Blogs", blogsSchema);

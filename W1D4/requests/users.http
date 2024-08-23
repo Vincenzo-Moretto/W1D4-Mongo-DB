@@ -1,0 +1,16 @@
+@baseUrl=http://localhost:5000/authors
+
+
+### CREA UN NUOVO AUTORE
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+
+{
+  "name": "Enzo",
+  "lastName": "More",
+  "birthday": "1993-23-06T00:00:00.000Z",
+  "email": "enzo@more.com",
+  "avatar": "https://njhalloffame.org/wp-content/uploads/2021/04/generic-avatar-300x300.png"
+}
