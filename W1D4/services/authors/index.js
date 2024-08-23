@@ -1,8 +1,7 @@
 import { Router } from "express";
 import Author from "./model.js";
 import Blog from "../blogs/model.js";
-import cloudinaryUploader from "../../config/index.js";
-import uploadCloudinary from "../../middlewares/uploadCloudinary.js";
+import cloudinaryUploader from "../../middlewares/uploadCloudinary.js";
 import * as AuthorController from "../../controllers/author.controller.js";
 export const authorRoute = Router();
 
@@ -54,7 +53,7 @@ authorRoute.put("/:id", async (req, res, next) => {
   }
 });
 
-authorRoute.patch("/:id/avatar", cloudinaryUploader, async (req, res, next) => {
+authorRoute.patch("/:id/avatar", cloudinaryUploader.single("avatar"), async (req, res, next) => {
   try {
     console.log(req.file);
     let updated = await Author.findByIdAndUpdate(req.params.id, { avatar: req.file.path }, { new: true });
@@ -75,4 +74,4 @@ authorRoute.delete("/:id", async (req, res, next) => {
   }
 });
 
-authorRoute.patch("/:id/avatar", uploadCloudinary.single("avatar"), AuthorController.createOne);
+authorRoute.patch("/:id/avatar", cloudinaryUploader.single("avatar"), AuthorController.createOne);

@@ -1,6 +1,6 @@
-import multer from "multer"
-import { v2 as cloudinary } from "cloudinary"
-import { CloudinaryStorage } from "multer-storage-cloudinary"
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 // Configuration
 export default multer({
@@ -10,4 +10,4 @@ export default multer({
       folder: "soluzioni",
     },
   }),
-}).single("avatar")
+}).single("avatar");
